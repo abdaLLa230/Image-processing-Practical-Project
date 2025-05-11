@@ -1,0 +1,62 @@
+/* Style for active enhancement buttons */
+        .enhancement-btn.active {
+            border-color: #6366f1;
+            background-color: #e0e7ff;
+        }
+        /* Style for processing overlay */
+        .processing-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+.hidden {
+    display: none;
+}
+
+/* تحسينات عامة للصور */
+.max-h-full {
+    max-height: 100%;
+}
+
+.max-w-full {
+    max-width: 100%;
+}
+
+.bg-gray-50 {
+    background-color: #f9fafb;
+}
+
+/* تأثيرات التحميل */
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* تحسينات شريط التمرير */
+input[type="range"] {
+    
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #3b82f6;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #3b82f6;
+    cursor: pointer;
+    border-radius: 50%;
+}
