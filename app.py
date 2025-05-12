@@ -118,8 +118,7 @@ active_effects = {
     'dilation': apply_dilation,
     'histogram': apply_histogram,
     'histeq': apply_histogram_equalization,
-    'sobel': apply_sobel
-    
+    'sobel': apply_sobel  
 }
 
 # Apply list of effects sequentially to an image
