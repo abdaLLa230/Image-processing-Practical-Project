@@ -72,6 +72,12 @@ def apply_crystal(img):
     # Apply stylization (cartoon/crystal-like effect)
     return cv2.stylization(img, sigma_s=60, sigma_r=0.6)
 
+
+def apply_erosion(img, kernel_size=3):
+    # Apply erosion to shrink white regions
+    kernel = np.ones((kernel_size, kernel_size), np.uint8)
+    return cv2.erode(img, kernel, iterations=1)
+    
 def apply_dilation(img, kernel_size=3):
     # Apply dilation to emphasize white regions
     kernel = np.ones((kernel_size, kernel_size), np.uint8)
@@ -109,10 +115,12 @@ active_effects = {
     'noise': apply_noise,
     'edge': apply_edge,
     'crystal': apply_crystal,
+    'erosion': apply_erosion,
     'dilation': apply_dilation,
     'histogram': apply_histogram,
     'histeq': apply_histogram_equalization,
     'sobel': apply_sobel
+    
 }
 
 # Apply list of effects sequentially to an image
