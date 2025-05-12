@@ -47,7 +47,7 @@ models = {
 # Make sure the upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-
+# Image Enhancement Functions
 # Image Enhancement Functions
 
 def apply_contrast(img, alpha=1.5, beta=0):
