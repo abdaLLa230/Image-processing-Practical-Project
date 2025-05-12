@@ -58,13 +58,21 @@ A Flask-based web application that allows users to **upload an image**, **enhanc
 
 Project-APP/
 ├── app.py # Main backend Flask application & Image enhancement and classification logic
+
 ├── static/
+
 │ ├── uploaded/ # Stores uploaded images & Processed images
+
 │ ├── script.js # Handles frontend interactivity
+
 │ └── style.css # Tailwind/custom styles
+
 ├── Templates/
+
 │ └── index.html # Main HTML interface
+
 ├── requirements.txt # Python dependencies
+
 └── Readme.md # Project documentation (this file)
 
 
