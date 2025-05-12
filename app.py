@@ -72,7 +72,6 @@ def apply_crystal(img):
     # Apply stylization (cartoon/crystal-like effect)
     return cv2.stylization(img, sigma_s=60, sigma_r=0.6)
 
-
 def apply_erosion(img, kernel_size=3):
     # Apply erosion to shrink white regions
     kernel = np.ones((kernel_size, kernel_size), np.uint8)
