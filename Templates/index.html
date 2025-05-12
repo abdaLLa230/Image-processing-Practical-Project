@@ -1,334 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <!-- Basic meta tags for character set and viewport settings -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Processing Practical Project</title>
 
     <!-- Font Awesome for icons and Google Fonts for Inter font family -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Custom CSS styles -->
-    <link rel="stylesheet" href="../static/style.css">
-    
+    <link rel="stylesheet" href="../static/style.css" />
+
     <!-- Tailwind CSS configuration and import -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <script>
-        // Tailwind custom configuration
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6366f1',
-                        secondary: '#8b5cf6',
-                        dark: '#1e293b',
-                        light: '#f8fafc'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
+      // Tailwind custom configuration
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#8b5cf6",
+              dark: "#1e293b",
+              light: "#f8fafc",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
-    
-    
-</head>
-<body class="bg-gray-100 font-sans">
+  </head>
+  <body class="bg-gray-100 font-sans">
     <!-- Main container with minimum height set to full viewport height -->
     <div class="min-h-screen flex flex-col">
-        <!-- Header section with gradient background -->
-        <header class="bg-gradient-to-r from-slate-500 to-gray-800 text-white shadow-lg">
-            <div class="container mx-auto px-4 py-3">
-                <div class="flex justify-between items-center">
-                    <h1 class="text-2xl font-semibold hover:text-gray-700 flex items-center">
-                        <span>Image Process Project</span>
-                    </h1>
+      <!-- Header section with gradient background -->
+      <header
+        class="bg-gradient-to-r from-slate-500 to-gray-800 text-white shadow-lg"
+      >
+        <div class="container mx-auto px-4 py-3">
+          <div class="flex justify-between items-center">
+            <h1
+              class="text-2xl font-semibold hover:text-gray-700 flex items-center"
+            >
+              <span>Image Process Project</span>
+            </h1>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main content area that grows to fill available space -->
+      <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Home Page - Default visible page -->
+        <div id="homePage" class="text-center mt-20">
+          <div
+            class="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden"
+          >
+            <div class="p-8">
+              <h2 class="text-2xl font-bold text-dark mb-6">
+                Select Processing Mode
+              </h2>
+              <!-- Two main action buttons -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Image Enhancement option -->
+                <div
+                  id="enhancementBtn"
+                  class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-6 border-2 border-transparent hover:border-primary transition-all cursor-pointer transform hover:scale-105"
+                >
+                  <div
+                    class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                  >
+                    <i class="fas fa-sliders-h text-primary text-2xl"></i>
+                  </div>
+                  <h3 class="text-xl font-semibold text-dark mb-2">
+                    Image Enhancement
+                  </h3>
+                  <p class="text-gray-600">
+                    Apply professional enhancements and filters to your images
+                  </p>
                 </div>
-            </div>
-        </header>
-
-        <!-- Main content area that grows to fill available space -->
-        <main class="flex-grow container mx-auto px-4 py-8">
-            <!-- Home Page - Default visible page -->
-            <div id="homePage" class="text-center mt-20">
-                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
-                    <div class="p-8">
-                        <h2 class="text-2xl font-bold text-dark mb-6">Select Processing Mode</h2>
-                        <!-- Two main action buttons -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Image Enhancement option -->
-                            <div id="enhancementBtn" class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-6 border-2 border-transparent hover:border-primary transition-all cursor-pointer transform hover:scale-105">
-                                <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-sliders-h text-primary text-2xl"></i>
-                                </div>
-                                <h3 class="text-xl font-semibold text-dark mb-2">Image Enhancement</h3>
-                                <p class="text-gray-600">Apply professional enhancements and filters to your images</p>
-                            </div>
-                            <!-- Image Classification option -->
-                            <div id="classificationBtn" class="bg-gradient-to-br from-green-50 to-teal-50 rounded-lg p-6 border-2 border-transparent hover:border-green-500 transition-all cursor-pointer transform hover:scale-105">
-                                <div class="bg-green-500/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-tags text-green-500 text-2xl"></i>
-                                </div>
-                                <h3 class="text-xl font-semibold text-dark mb-2">Image Classification</h3>
-                                <p class="text-gray-600">Identify objects using advanced AI models</p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Image Classification option -->
+                <div
+                  id="classificationBtn"
+                  class="bg-gradient-to-br from-green-50 to-teal-50 rounded-lg p-6 border-2 border-transparent hover:border-green-500 transition-all cursor-pointer transform hover:scale-105"
+                >
+                  <div
+                    class="bg-green-500/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                  >
+                    <i class="fas fa-tags text-green-500 text-2xl"></i>
+                  </div>
+                  <h3 class="text-xl font-semibold text-dark mb-2">
+                    Image Classification
+                  </h3>
+                  <p class="text-gray-600">
+                    Identify objects using advanced AI models
+                  </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enhancement Page - Initially hidden -->
+        <div id="enhancementPage" class="hidden">
+          <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+            <!-- Page Header with gradient background -->
+            <div
+              class="bg-gradient-to-r from-primary to-secondary px-6 py-4 flex justify-between items-center"
+            >
+              <h2 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-sliders-h mr-2"></i>
+                Image Enhancement
+              </h2>
+              <!-- Back button to return to home page -->
+              <button
+                id="backToHomeFromEnhancement"
+                class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition"
+              >
+                <i class="fas fa-arrow-left mr-2"></i> Back
+              </button>
             </div>
 
-            <!-- Enhancement Page - Initially hidden -->
-            <div id="enhancementPage" class="hidden">
-                <div class="bg-white rounded-xl shadow-xl overflow-hidden">
-                    <!-- Page Header with gradient background -->
-                    <div class="bg-gradient-to-r from-primary to-secondary px-6 py-4 flex justify-between items-center">
-                        <h2 class="text-xl font-bold text-white flex items-center">
-                            <i class="fas fa-sliders-h mr-2"></i>
-                            Image Enhancement
-                        </h2>
-                        <!-- Back button to return to home page -->
-                        <button id="backToHomeFromEnhancement" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition">
-                            <i class="fas fa-arrow-left mr-2"></i> Back
-                        </button>
+            <!-- Main content area for enhancement page -->
+            <div class="p-6">
+              <!-- Image upload section -->
+              <div
+                class="mb-8 bg-gray-50 rounded-lg p-6 border border-dashed border-gray-300"
+              >
+                <div
+                  class="flex flex-col md:flex-row items-center justify-between gap-4"
+                >
+                  <div class="flex-grow">
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Upload Image</label
+                    >
+                    <div class="flex items-center">
+                      <!-- Hidden file input triggered by button -->
+                      <input
+                        type="file"
+                        id="imageUpload"
+                        accept="image/*"
+                        class="hidden"
+                      />
+                      <!-- Upload button -->
+                      <button
+                        id="uploadBtn"
+                        class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition flex items-center"
+                      >
+                        <i class="fas fa-cloud-upload-alt mr-2"></i> Choose File
+                      </button>
+                      <!-- File name display -->
+                      <span
+                        id="fileName"
+                        class="ml-4 text-gray-500 truncate max-w-xs"
+                        >No file selected</span
+                      >
                     </div>
-
-                    <!-- Main content area for enhancement page -->
-                    <div class="p-6">
-                        <!-- Image upload section -->
-                        <div class="mb-8 bg-gray-50 rounded-lg p-6 border border-dashed border-gray-300">
-                            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                                <div class="flex-grow">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Upload Image</label>
-                                    <div class="flex items-center">
-                                        <!-- Hidden file input triggered by button -->
-                                        <input type="file" id="imageUpload" accept="image/*" class="hidden">
-                                        <!-- Upload button -->
-                                        <button id="uploadBtn" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition flex items-center">
-                                            <i class="fas fa-cloud-upload-alt mr-2"></i> Choose File
-                                        </button>
-                                        <!-- File name display -->
-                                        <span id="fileName" class="ml-4 text-gray-500 truncate max-w-xs">No file selected</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Image preview section with before/after comparison -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                            <!-- Original image container -->
-                            <div class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                                <div class="bg-gray-200 px-4 py-2 border-b border-gray-300">
-                                    <h3 class="font-medium text-gray-700 flex items-center">
-                                        <i class="fas fa-image mr-2 text-primary"></i>
-                                        Original Image
-                                    </h3>
-                                </div>
-                                <div class="h-80 flex items-center justify-center relative">
-                                    <!-- Original image element -->
-                                    <img id="originalImage" src="" alt="Original Image" class="max-h-full max-w-full hidden object-contain">
-                                    <!-- Placeholder when no image is loaded -->
-                                    <div id="originalPlaceholder" class="text-center p-6 text-gray-400">
-                                        <i class="fas fa-image text-4xl mb-3 block"></i>
-                                        <p>Original image will appear here</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Processed image container -->
-                            <div class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                                <div class="bg-gray-200 px-4 py-2 border-b border-gray-300">
-                                    <h3 class="font-medium text-gray-700 flex items-center">
-                                        <i class="fas fa-magic mr-2 text-green-500"></i>
-                                        Processed Image
-                                    </h3>
-                                </div>
-                                <div class="h-80 flex items-center justify-center relative">
-                                    <!-- Processed image element -->
-                                    <img id="processedImage" src="" alt="Processed Image" class="max-h-full max-w-full hidden object-contain">
-                                    <!-- Placeholder when no processing has been done -->
-                                    <div id="processedPlaceholder" class="text-center p-6 text-gray-400">
-                                        <i class="fas fa-magic text-4xl mb-3 block"></i>
-                                        <p>Processed image will appear here</p>
-                                    </div>
-                                    <!-- Processing overlay (shown during image processing) -->
-                                    <div id="processingOverlay" class="absolute inset-0 processing-overlay flex items-center justify-center hidden">
-                                        <div class="text-white text-center">
-                                            <i class="fas fa-spinner fa-spin text-3xl mb-2"></i>
-                                            <p>Processing...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Enhancement tools section -->
-                        <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                                <i class="fas fa-tools mr-2 text-secondary"></i>
-                                Enhancement Tools
-                            </h3>
-                            
-                            <!-- Grid of enhancement buttons -->
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-6">
-                                <!-- Contrast enhancement button -->
-                                <button data-type="contrast" class="enhancement-btn bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-adjust mr-2"></i> Contrast</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                                <!-- Invert colors button -->
-                                <button data-type="invert" class="enhancement-btn bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-inverse mr-2"></i> Invert</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                                <!-- Noise effect button -->
-                                <button data-type="noise" class="enhancement-btn bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-bahai mr-2"></i> Noise</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                                <!-- Edge detection button -->
-                                <button data-type="edge" class="enhancement-btn bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-border-style mr-2"></i> Edge</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                                <!-- Crystal effect button -->
-                                <button data-type="crystal" class="enhancement-btn bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-gem mr-2"></i> Crystal</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                                <!-- Dilation effect button -->
-                                <button data-type="dilation" class="enhancement-btn bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-expand mr-2"></i> Dilation</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                                <!-- Histogram button -->
-                                <button data-type="histogram" class="enhancement-btn bg-pink-50 hover:bg-pink-100 text-pink-700 px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-chart-bar mr-2"></i> Histogram</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                                <!-- Histogram equalization button -->
-                                <button data-type="histeq" class="enhancement-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-chart-line mr-2"></i> Histogram EQ</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                                <!-- Sobel edge detection button -->
-                                <button data-type="sobel" class="enhancement-btn bg-gray-800 hover:bg-gray-900 text-white px-3 py-2 rounded-lg transition flex items-center justify-between">
-                                    <span><i class="fas fa-mountain mr-2"></i> Sobel</span>
-                                    <span class="badge hidden"><i class="fas fa-check-circle"></i></span>
-                                </button>
-                            </div>
-                            <!-- Process image button -->
-                            <button id="processBtn" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
-                                    <i class="fas fa-magic mr-2"></i> Process Image
-                                </button>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-            </div>
+              </div>
 
-            <!-- Classification Page - Initially hidden -->
-            <div id="classificationPage" class="hidden">
-                <div class="bg-white rounded-xl shadow-xl overflow-hidden">
-                    <!-- Page Header with gradient background -->
-                    <div class="bg-gradient-to-r from-green-500 to-teal-500 px-6 py-4 flex justify-between items-center">
-                        <h2 class="text-xl font-bold text-white flex items-center">
-                            <i class="fas fa-tags mr-2"></i>
-                            Image Classification
-                        </h2>
-                        <!-- Back button to return to home page -->
-                        <button id="backToHomeFromClassification" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition">
-                            <i class="fas fa-arrow-left mr-2"></i> Back
-                        </button>
+              <!-- Image preview section with before/after comparison -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Original image container -->
+                <div
+                  class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200"
+                >
+                  <div class="bg-gray-200 px-4 py-2 border-b border-gray-300">
+                    <h3 class="font-medium text-gray-700 flex items-center">
+                      <i class="fas fa-image mr-2 text-primary"></i>
+                      Original Image
+                    </h3>
+                  </div>
+                  <div class="h-80 flex items-center justify-center relative">
+                    <!-- Original image element -->
+                    <img
+                      id="originalImage"
+                      src=""
+                      alt="Original Image"
+                      class="max-h-full max-w-full hidden object-contain"
+                    />
+                    <!-- Placeholder when no image is loaded -->
+                    <div
+                      id="originalPlaceholder"
+                      class="text-center p-6 text-gray-400"
+                    >
+                      <i class="fas fa-image text-4xl mb-3 block"></i>
+                      <p>Original image will appear here</p>
                     </div>
-
-                    <!-- Main content area for classification page -->
-                    <div class="p-6">
-                        <!-- Upload section for classification -->
-                        <div class="mb-8 bg-gray-50 rounded-lg p-6 border border-dashed border-gray-300">
-                            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                                <div class="flex-grow">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Upload Image</label>
-                                    <div class="flex items-center">
-                                        <!-- Hidden file input triggered by button -->
-                                        <input type="file" id="classifyImageUpload" accept="image/*" class="hidden">
-                                        <!-- Upload button -->
-                                        <button id="classifyUploadBtn" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition flex items-center">
-                                            <i class="fas fa-cloud-upload-alt mr-2"></i> Choose File
-                                        </button>
-                                        <!-- File name display -->
-                                        <span id="classifyFileName" class="ml-4 text-gray-500 truncate max-w-xs">No file selected</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <!-- Model selection dropdown -->
-                                    <select id="modelSelect" class="bg-white border border-gray-300 text-gray-700 py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50">
-                                        <option value="resnet">ResNet50</option>
-                                        <option value="efficientnet">EfficientNetB0</option>
-                                        <option value="mobilenet">MobileNetV2</option>
-                                    </select>
-                                    <!-- Classify button -->
-                                    <button id="classifyBtn" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
-                                        <i class="fas fa-brain mr-2"></i> Classify
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Results display section -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Original image container -->
-                            <div class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                                <div class="bg-gray-200 px-4 py-2 border-b border-gray-300">
-                                    <h3 class="font-medium text-gray-700 flex items-center">
-                                        <i class="fas fa-image mr-2 text-primary"></i>
-                                        Original Image
-                                    </h3>
-                                </div>
-                                <div class="h-80 flex items-center justify-center">
-                                    <!-- Original image element -->
-                                    <img id="classifyOriginalImage" src="" alt="Original Image" class="max-h-full max-w-full hidden object-contain">
-                                    <!-- Placeholder when no image is loaded -->
-                                    <div id="classifyOriginalPlaceholder" class="text-center p-6 text-gray-400">
-                                        <i class="fas fa-image text-4xl mb-3 block"></i>
-                                        <p>Original image will appear here</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Classification results container -->
-                            <div class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                                <div class="bg-gray-200 px-4 py-2 border-b border-gray-300">
-                                    <h3 class="font-medium text-gray-700 flex items-center">
-                                        <i class="fas fa-list-alt mr-2 text-green-500"></i>
-                                        Classification Results
-                                    </h3>
-                                </div>
-                                <div class="h-80 p-4 overflow-y-auto">
-                                    <!-- Results display area -->
-                                    <div id="classificationResults" class="text-center text-gray-400 h-full flex flex-col items-center justify-center">
-                                        <i class="fas fa-tags text-4xl mb-3 block"></i>
-                                        <p>Classification results will appear here</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-            </div>
-        </main>
 
-        <!-- Footer section -->
-        <footer class="bg-dark text-white py-2">
-            <div class="container mx-auto px-4 text-center">
-                <p class="mb-2"> Image Processor - Professional Image Enhancement & Classification</p>
+                <!-- Processed image container -->
+                <div
+                  class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200"
+                >
+                  <div class="bg-gray-200 px-4 py-2 border-b border-gray-300">
+                    <h3 class="font-medium text-gray-700 flex items-center">
+                      <i class="fas fa-magic mr-2 text-green-500"></i>
+                      Processed Image
+                    </h3>
+                  </div>
+                  <div class="h-80 flex items-center justify-center relative">
+                    <!-- Processed image element -->
+                    <img
+                      id="processedImage"
+                      src=""
+                      alt="Processed Image"
+                      class="max-h-full max-w-full hidden object-contain"
+                    />
+                    <!-- Placeholder when no processing has been done -->
+                    <div
+                      id="processedPlaceholder"
+                      class="text-center p-6 text-gray-400"
+                    >
+                      <i class="fas fa-magic text-4xl mb-3 block"></i>
+                      <p>Processed image will appear here</p>
+                    </div>
+                    <!-- Processing overlay (shown during image processing) -->
+                    <div
+                      id="processingOverlay"
+                      class="absolute inset-0 processing-overlay flex items-center justify-center hidden"
+                    >
+                      <div class="text-white text-center">
+                        <i class="fas fa-spinner fa-spin text-3xl mb-2"></i>
+                        <p>Processing...</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Enhancement tools section -->
+              <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                <h3
+                  class="text-lg font-semibold text-gray-800 mb-4 flex items-center"
+                >
+                  <i class="fas fa-tools mr-2 text-secondary"></i>
+                  Enhancement Tools
+                </h3>
+
+                <!-- Grid of enhancement buttons -->
+                <div
+                  class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-6"
+                >
+                  <!-- Contrast enhancement button -->
+                  <button
+                    data-type="contrast"
+                    class="enhancement-btn bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span><i class="fas fa-adjust mr-2"></i> Contrast</span>
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                  <!-- Invert colors button -->
+                  <button
+                    data-type="invert"
+                    class="enhancement-btn bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span><i class="fas fa-inverse mr-2"></i> Invert</span>
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                  <!-- Noise effect button -->
+                  <button
+                    data-type="noise"
+                    class="enhancement-btn bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span><i class="fas fa-bahai mr-2"></i> Noise</span>
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                  <!-- Edge detection button -->
+                  <button
+                    data-type="edge"
+                    class="enhancement-btn bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span><i class="fas fa-border-style mr-2"></i> Edge</span>
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                  <!-- Crystal effect button -->
+                  <button
+                    data-type="crystal"
+                    class="enhancement-btn bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span><i class="fas fa-gem mr-2"></i> Crystal</span>
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                  <!-- Dilation effect button -->
+                  <button
+                    data-type="dilation"
+                    class="enhancement-btn bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span><i class="fas fa-expand mr-2"></i> Dilation</span>
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                  <!-- Histogram button -->
+                  <button
+                    data-type="histogram"
+                    class="enhancement-btn bg-pink-50 hover:bg-pink-100 text-pink-700 px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span><i class="fas fa-chart-bar mr-2"></i> Histogram</span>
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                  <!-- Histogram equalization button -->
+                  <button
+                    data-type="histeq"
+                    class="enhancement-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span
+                      ><i class="fas fa-chart-line mr-2"></i> Histogram EQ</span
+                    >
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                  <!-- Sobel edge detection button -->
+                  <button
+                    data-type="sobel"
+                    class="enhancement-btn bg-gray-800 hover:bg-gray-900 text-white px-3 py-2 rounded-lg transition flex items-center justify-between"
+                  >
+                    <span><i class="fas fa-mountain mr-2"></i> Sobel</span>
+                    <span class="badge hidden"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                  </button>
+                </div>
+                <!-- Process image button -->
+                <button
+                  id="processBtn"
+                  class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                >
+                  <i class="fas fa-magic mr-2"></i> Process Image
+                </button>
+              </div>
             </div>
-        </footer>
+          </div>
+        </div>
+
+        <!-- Classification Page - Initially hidden -->
+        <div id="classificationPage" class="hidden">
+          <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+            <!-- Page Header with gradient background -->
+            <div
+              class="bg-gradient-to-r from-green-500 to-teal-500 px-6 py-4 flex justify-between items-center"
+            >
+              <h2 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-tags mr-2"></i>
+                Image Classification
+              </h2>
+              <!-- Back button to return to home page -->
+              <button
+                id="backToHomeFromClassification"
+                class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition"
+              >
+                <i class="fas fa-arrow-left mr-2"></i> Back
+              </button>
+            </div>
+
+            <!-- Main content area for classification page -->
+            <div class="p-6">
+              <!-- Upload section for classification -->
+              <div
+                class="mb-8 bg-gray-50 rounded-lg p-6 border border-dashed border-gray-300"
+              >
+                <div
+                  class="flex flex-col md:flex-row items-center justify-between gap-4"
+                >
+                  <div class="flex-grow">
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Upload Image</label
+                    >
+                    <div class="flex items-center">
+                      <!-- Hidden file input triggered by button -->
+                      <input
+                        type="file"
+                        id="classifyImageUpload"
+                        accept="image/*"
+                        class="hidden"
+                      />
+                      <!-- Upload button -->
+                      <button
+                        id="classifyUploadBtn"
+                        class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition flex items-center"
+                      >
+                        <i class="fas fa-cloud-upload-alt mr-2"></i> Choose File
+                      </button>
+                      <!-- File name display -->
+                      <span
+                        id="classifyFileName"
+                        class="ml-4 text-gray-500 truncate max-w-xs"
+                        >No file selected</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <!-- Model selection dropdown -->
+                    <select
+                      id="modelSelect"
+                      class="bg-white border border-gray-300 text-gray-700 py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    >
+                      <option value="resnet">ResNet50</option>
+                      <option value="efficientnet">EfficientNetB0</option>
+                      <option value="mobilenet">MobileNetV2</option>
+                    </select>
+                    <!-- Classify button -->
+                    <button
+                      id="classifyBtn"
+                      class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                    >
+                      <i class="fas fa-brain mr-2"></i> Classify
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Results display section -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Original image container -->
+                <div
+                  class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200"
+                >
+                  <div class="bg-gray-200 px-4 py-2 border-b border-gray-300">
+                    <h3 class="font-medium text-gray-700 flex items-center">
+                      <i class="fas fa-image mr-2 text-primary"></i>
+                      Original Image
+                    </h3>
+                  </div>
+                  <div class="h-80 flex items-center justify-center">
+                    <!-- Original image element -->
+                    <img
+                      id="classifyOriginalImage"
+                      src=""
+                      alt="Original Image"
+                      class="max-h-full max-w-full hidden object-contain"
+                    />
+                    <!-- Placeholder when no image is loaded -->
+                    <div
+                      id="classifyOriginalPlaceholder"
+                      class="text-center p-6 text-gray-400"
+                    >
+                      <i class="fas fa-image text-4xl mb-3 block"></i>
+                      <p>Original image will appear here</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Classification results container -->
+                <div
+                  class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200"
+                >
+                  <div class="bg-gray-200 px-4 py-2 border-b border-gray-300">
+                    <h3 class="font-medium text-gray-700 flex items-center">
+                      <i class="fas fa-list-alt mr-2 text-green-500"></i>
+                      Classification Results
+                    </h3>
+                  </div>
+                  <div class="h-80 p-4 overflow-y-auto">
+                    <!-- Results display area -->
+                    <div
+                      id="classificationResults"
+                      class="text-center text-gray-400 h-full flex flex-col items-center justify-center"
+                    >
+                      <i class="fas fa-tags text-4xl mb-3 block"></i>
+                      <p>Classification results will appear here</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      //this is comment
+      <!-- Footer section -->
+      <footer class="bg-dark text-white py-2">
+        <div class="container mx-auto px-4 text-center">
+          <p class="mb-2">
+            Image Processor - Professional Image Enhancement & Classification
+          </p>
+        </div>
+      </footer>
     </div>
 
     <!-- Link to external JavaScript file -->
     <script src="../static/script.js"></script>
-</body>
+  </body>
 </html>
