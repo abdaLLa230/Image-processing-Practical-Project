@@ -1,7 +1,6 @@
-Flask
-Werkzeug
-Pillow
+flask
+opencv-python
 numpy
+pillow
 tensorflow
-torch
-torchvision
+scikit-image
