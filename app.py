@@ -208,6 +208,6 @@ def process_image():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-# Run the Flask app
+# Run the Flask app for Web
 if __name__ == '__main__':
     app.run(debug=True)
