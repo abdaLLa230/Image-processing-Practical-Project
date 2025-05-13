@@ -6,7 +6,7 @@ A Flask-based web application that allows users to **upload an image**, **enhanc
 ## 📸 Features
 
 - Upload any image from your device.
-- Apply enhancement effects l.
+- Apply enhancement effects .
 - Choose multiple enhancement filters at once.
 - Preview both original and enhanced images.
 - Classify the image using a machine learning model.
@@ -40,10 +40,6 @@ A Flask-based web application that allows users to **upload an image**, **enhanc
 
 ---
 
-
-
----
-
 ## 🛠️ Technologies Used
 
 - **Backend:** Flask (Python)
@@ -51,7 +47,6 @@ A Flask-based web application that allows users to **upload an image**, **enhanc
 - **Machine Learning:** TensorFlow / PyTorch models (loaded server-side)
 - **Image Processing:** PIL (Python Imaging Library)
 - **Deployment:** Localhost / Render
-
 
 
 ## 🗂️ Project Structure
