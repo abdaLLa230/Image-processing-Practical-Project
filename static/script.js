@@ -21,8 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // NAVIGATION EVENT HANDLERS
-  // NAVIGATION EVENT HANDLERS
-
   // Add click event listeners for navigation buttons
   document
     .getElementById("enhancementBtn")
@@ -41,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
   showPage("home");
 
   // IMAGE ENHANCEMENT FUNCTIONALITY
-
   // Get all DOM elements needed for image enhancement
   const imageUpload = document.getElementById("imageUpload");
   const uploadBtn = document.getElementById("uploadBtn");
@@ -158,9 +155,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // ==============================================
+
   // IMAGE CLASSIFICATION FUNCTIONALITY
-  // ==============================================
 
   // Get all DOM elements needed for image classification
   const classifyImageUpload = document.getElementById("classifyImageUpload");
